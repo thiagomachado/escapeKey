@@ -1,4 +1,5 @@
-var State = function(game) {
+var State = function(game)
+{
     // The game object
     this.game    = game;
 
@@ -16,7 +17,8 @@ var State = function(game) {
 
 };
 
-State.prototype = {
+State.prototype =
+{
 
     /**
      * The function used to create the scene for this state
@@ -38,7 +40,8 @@ State.prototype = {
      * @returns {BABYLON.Scene}
      * @private
      */
-    _initScene : function() {
+    _initScene : function()
+    {
         return null;
     },
 
@@ -53,8 +56,10 @@ State.prototype = {
      * @param task
      * @private
      */
-    _initMesh : function(task) {
-        for (var i=0; i<task.loadedMeshes.length; i++ ){
+    _initMesh : function(task)
+    {
+        for (var i=0; i<task.loadedMeshes.length; i++ )
+        {
             var mesh = task.loadedMeshes[i];
             mesh.isVisible = false;
         }

@@ -3,7 +3,8 @@
  * @param game
  * @constructor
  */
-var GameState = function(game) {
+var GameState = function(game)
+{
     State.call(this, game);
 
     // All gamepad id currently connected
@@ -14,19 +15,19 @@ var GameState = function(game) {
 GameState.prototype = Object.create(State.prototype);
 GameState.prototype.constructor = GameState;
 
-
-GameState.prototype = {
-
-
-    _initScene : function() {
+GameState.prototype =
+{
+    _initScene : function()
+    {
 
         var scene = new BABYLON.Scene(this.engine);
-        scene.enablePhysics();
+        scene.enablePhysics(new BABYLON.Vector3(0, -500, 0), new BABYLON.OimoJSPlugin());
 
         // Camera attached to the canvas
         var camera= new BABYLON.FreeCamera("cam", new BABYLON.Vector3(0, 200, -340), scene);
         camera.setTarget(new BABYLON.Vector3(0,0,0));
-        //camera.attachControl(this.engine.getRenderingCanvas());
+        camera.applyGravity = true;
+        camera.attachControl(this.engine.getRenderingCanvas());
 
         // Hemispheric light to light the scene
         var h = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0,1,0), scene);
@@ -55,7 +56,8 @@ GameState.prototype = {
     /**
      * Run the current state
      */
-    run : function() {
+    run : function()
+    {
 
         this.scene = this._initScene();
 
@@ -67,7 +69,8 @@ GameState.prototype = {
         //    meshTask.onSuccess = this._initMesh;
 
         var _this = this;
-        loader.onFinish = function (tasks) {
+        loader.onFinish = function (tasks)
+        {
 
             // Init the game
             _this._initGame();
@@ -75,7 +78,8 @@ GameState.prototype = {
             // The state is ready to be played
             _this.isReady = true;
 
-            _this.engine.runRenderLoop(function () {
+            _this.engine.runRenderLoop(function ()
+            {
                 _this.scene.render();
             });
         };
@@ -83,7 +87,8 @@ GameState.prototype = {
         loader.load();
     },
 
-    _initGame : function() {
+    _initGame : function()
+    {
         new Player(this.game, this.scene);
     }
 };

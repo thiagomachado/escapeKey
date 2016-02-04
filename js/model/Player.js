@@ -1,4 +1,5 @@
-var Player = function(game, scene, gamepad) {
+var Player = function(game, scene, gamepad)
+{
 
     this.game = game;
     this.scene = scene;
@@ -7,7 +8,7 @@ var Player = function(game, scene, gamepad) {
     /* MESH */
     this.box = BABYLON.Mesh.CreateBox("player", 10, this.scene);
     this.box.position.y = 2;
-    this.body = this.box.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:1, friction:0.001, restitution:10.5});
+    this.body = this.box.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:1, friction:0.1, restitution:0.1});
     var matos = new BABYLON.StandardMaterial("matos", this.scene);
     matos.diffuseColor = BABYLON.Color3.Green();
     this.box.material = matos;
@@ -16,32 +17,38 @@ var Player = function(game, scene, gamepad) {
     this.mvtDirection = [0,0,0,0];
 
     // The player speed
-    this.speed = 0.5;
+    this.speed = 0.8;
 
     /* GAMEPAD*/
     var _this = this;
-    this.scene.registerBeforeRender(function() {
+    this.scene.registerBeforeRender(function()
+    {
         _this.update();
     });
 
     /* KEYBOARD */
-    window.addEventListener("keyup", function(evt) {
+    window.addEventListener("keyup", function(evt)
+    {
         _this.handleKeyUp(evt.keyCode);
     });
 
-    window.addEventListener("keydown", function(evt) {
+    window.addEventListener("keydown", function(evt)
+    {
         _this.handleKeyDown(evt.keyCode);
     });
 };
 
-Player.DIRECTIONS = {
-    ZQSD : {
+Player.DIRECTIONS =
+{
+    ZQSD :
+    {
         TOP     : 90,
         BOT     : 83,
         LEFT    : 81,
         RIGHT   : 68
     },
-    QWSD : {
+    QWSD :
+    {
         TOP     : 87,
         BOT     : 83,
         LEFT    : 65,
@@ -49,8 +56,10 @@ Player.DIRECTIONS = {
     }
 };
 
-Player.ACTIONS = {
-    FIRE : {
+Player.ACTIONS =
+{
+    FIRE :
+    {
         TOP     : 38,
         BOT     : 40,
         LEFT    : 37,
@@ -58,9 +67,11 @@ Player.ACTIONS = {
     }
 };
 
-Player.prototype = {
+Player.prototype =
+{
 
-    update : function() {
+    update : function()
+    {
         this.move();
     },
 
@@ -70,11 +81,13 @@ Player.prototype = {
      * and the firing direction.
      * @private
      */
-    _chooseDirection : function(direction, value) {
+    _chooseDirection : function(direction, value)
+    {
         this.mvtDirection[direction] = value;
     },
 
-    move : function() {
+    move : function()
+    {
 
         var s = 5;
 
@@ -94,8 +107,10 @@ Player.prototype = {
         this.body.body.angularVelocity.scaleEqual(0);
     },
 
-    handleKeyDown : function(keycode) {
-        switch (keycode) {
+    handleKeyDown : function(keycode)
+    {
+        switch (keycode)
+        {
             case Player.DIRECTIONS.ZQSD.TOP :
             case Player.DIRECTIONS.QWSD.TOP :
                 this._chooseDirection(0, 1);
@@ -115,9 +130,11 @@ Player.prototype = {
         }
     },
 
-    handleKeyUp : function(keycode) {
+    handleKeyUp : function(keycode)
+    {
 
-        switch (keycode) {
+        switch (keycode)
+        {
             case Player.DIRECTIONS.ZQSD.TOP :
             case Player.DIRECTIONS.QWSD.TOP :
                 this._chooseDirection(0,0);
@@ -137,7 +154,8 @@ Player.prototype = {
         }
     },
 
-    destroy : function() {
+    destroy : function()
+    {
         this.box.dispose();
     }
 };
