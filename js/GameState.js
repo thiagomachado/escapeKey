@@ -36,19 +36,34 @@ GameState.prototype =
 
         // Ground creation
         var ground = BABYLON.Mesh.CreateGround("ground", 300, 300, 1, scene);
+
+        var groundMaterial = new BABYLON.StandardMaterial("groundMaterial",scene);
+        var groundTexture = new BABYLON.Texture('js/shaders/ground.jpg', scene);
         ground.receiveShadows = true;
+
+        groundMaterial.diffuseTexture = groundTexture;
+        ground.material = groundMaterial;
+
         ground.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
 
-        var mat = new BABYLON.StandardMaterial("mat", scene);
-        mat.diffuseColor = BABYLON.Color3.FromInts(121,189,224);
+
 
         //create wall
-        var mur = BABYLON.Mesh.CreateBox("box", 1.0, scene);
-        mur.scaling = new BABYLON.Vector3(300,10,1);
-        mur.position.z = -150;
+        var wallMaterial            = new BABYLON.StandardMaterial("wallMaterial", scene);
+        //wallMaterial.emissiveColor  = new BABYLON.Color3(0.1, 0.1, 0.15);
+        wallMaterial.diffuseTexture = new BABYLON.Texture("js/shaders/wall.jpg", scene);
+        wallMaterial.bumpTexture = new BABYLON.Texture("js/shaders/wallBump.jpg", scene);
+        wallMaterial.specularTexture = new BABYLON.Texture("js/shaders/wallBump.jpg", scene);
+        // var wallTexture             = new BABYLON.Texture('js/shaders/paredecinza.jpg', scene);
+        // wallTexture.uScale          = 10;
+        // wallTexture.vScale          = 2;
+        var wall                    = BABYLON.Mesh.CreateBox("box", 1.0, scene);
+        wall.scaling                = new BABYLON.Vector3(300,20,10);
+        wall.position.z             = -150;
+        //wallMaterial.diffuseTexture = wallTexture;
+        wall.material = wallMaterial;
+        wall.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
 
-        mur.material = mat;
-        mur.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
 
         return scene;
     },
