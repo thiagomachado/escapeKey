@@ -90,5 +90,6 @@ GameState.prototype =
     _initGame : function()
     {
         new Player(this.game, this.scene);
+        new Enemy(this.game, this.scene);
     }
 };
