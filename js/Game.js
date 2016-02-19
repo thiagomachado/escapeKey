@@ -25,6 +25,13 @@ Game = function(canvasId)
  * The games states.
  */
 Game.STATES = [
+   /* { // The menu page
+        title:"Iniciate Game",
+        create:function(game)
+        {
+            return new GameMenu(game);
+        }
+    },*/
     { // The starting state
         title:"Player select",
         create:function(game)
@@ -66,5 +73,16 @@ Game.prototype =
     removePlayer : function(scene, gamepad)
     {
         this.players[gamepad.id].destroy();
+    },
+
+    addEnemy : function(gamepad)
+    {
+        var enemy = new enemy(this, this.currentState.scene, gamepad);
+        this.enemies[gamepad.id] = player;
+    },
+
+    removeEnemy : function(scene, gamepad)
+    {
+        this.enemies[gamepad.id].destroy();
     }
 };
