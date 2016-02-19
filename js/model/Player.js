@@ -103,8 +103,8 @@ Player.prototype =
         if (this.mvtDirection[3] != 0) {
             this.box.applyImpulse(new BABYLON.Vector3(s,0,0), this.box.position);
         }
-        this.body.body.linearVelocity.scaleEqual(0.95);
-        this.body.body.angularVelocity.scaleEqual(0.30);
+        this.body.body.linearVelocity.scaleEqual(0.92);
+        this.body.body.angularVelocity.scaleEqual(0);
     },
 
     handleKeyDown : function(keycode)
