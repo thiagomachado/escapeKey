@@ -1,23 +1,40 @@
 <!DOCTYPE html>
+<html>
 <head>
+    <title>EscapeKey</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <!--The libraries -->
-		<script src="js/lib/babylon.2.2.js"></script>
     <script src="js/lib/Oimo.js"></script>
 
     <!--The states-->
     <script src="js/State.js"></script>
     <script src="js/GameState.js"></script>
-    <script src="js/Game.js"></script>
+    
+    <script src="js/cannon.js"></script>
+    <script src="js/qrcode.js"></script>
+	<script src="js/babylon.js"></script>
 
 		<!--The models -->
     <script src="js/model/Player.js"></script>
+	<script src="js/model/Wall.js"></script>
     <script src="js/model/Enemy.js"></script>
-
 </head>
-<body>
-	<canvas id="renderCanvas"></canvas>
 
+<body>
+    <canvas id="canvas" class="offScreen"></canvas>
+    <div id="dialog-form" title="Create Level 1">
+        <form>
+            <fieldset>
+                <label for="name">Name of your cat:</label>
+                <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+            </fieldset>
+        </form>
+    </div>
+    <div id="logo">
+    </div>
 </body>
 </html>
