@@ -56,6 +56,7 @@ GameState.prototype =
         var wall5 = new Wall(scene,-75,5,75,1,4,new BABYLON.Vector3(0.2,1,15));
         var wall6 = new Wall(scene,75,5,75,1,4,new BABYLON.Vector3(0.2,1,15));
         var wall7 = new Wall(scene,0,5,-70,4,1,new BABYLON.Vector3(15,1,0.2));
+
         return scene;
     },
 
@@ -96,6 +97,6 @@ GameState.prototype =
     _initGame : function()
     {
         new Player(this.game, this.scene);
-        new Enemy(this.game, this.scene);
+        new Enemy(this.game, this.scene);		
     }
 };

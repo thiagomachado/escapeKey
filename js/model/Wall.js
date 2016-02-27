@@ -25,6 +25,6 @@ var Wall = function (scene,x,y,z,scaleU,scaleV,scaling)
   wall.position.y              = this.positionY;
   wall.position.x              = this.positionX;
   wall.material                = wallMaterial;
-  
+
   wall.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
 }
