@@ -6,8 +6,11 @@ document.addEventListener("DOMContentLoaded", function ()
 
 window.addEventListener("resize", function ()
 {
+  canvas = document.getElementById("renderCanvas");
+  engine = new BABYLON.Engine(canvas, true);
   engine.resize();
 });
+
 Game = function(canvasId)
 {
 
@@ -27,14 +30,8 @@ Game = function(canvasId)
 /**
  * The games states.
  */
-Game.STATES = [
-   /* { // The menu page
-        title:"Iniciate Game",
-        create:function(game)
-        {
-            return new GameMenu(game);
-        }
-    },*/
+Game.STATES =
+[
     { // The starting state
         title:"Player select",
         create:function(game)
@@ -80,12 +77,22 @@ Game.prototype =
 
     addEnemy : function(gamepad)
     {
-        var enemy = new enemy(this, this.currentState.scene, gamepad);
-        this.enemies[gamepad.id] = player;
+        var enemy = new enemy(this, this.currentState.scene);
     },
 
-    removeEnemy : function(scene, gamepad)
+    removeEnemy : function(scene)
     {
-        this.enemies[gamepad.id].destroy();
+        this.enemy.destroy();
+    },
+
+	addKey : function()
+    {
+        var key = new Key(this, this.currentState.scene);
+    },
+
+    removeKey : function(scene)
+    {
+        this.key.destroy();
     }
+
 };

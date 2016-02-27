@@ -1,23 +1,29 @@
-var Player = function(game, scene, gamepad)
+var Player = function(game, scene, gamepad, x, z)
 {
-
+	this.x = x;
+	this.z = z;
     this.game = game;
     this.scene = scene;
     this.gamepad = gamepad;
+	this.score = 0;
+	
 
     /* MESH */
     this.box = BABYLON.Mesh.CreateBox("player", 10, this.scene);
-    this.box.position.y = 2;
+	this.box.position.x = x;
+	this.box.position.y = 2;
+	this.box.position.z = z;
     this.body = this.box.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:1, friction:0.1, restitution:0.1});
     var matos = new BABYLON.StandardMaterial("matos", this.scene);
     matos.diffuseColor = BABYLON.Color3.Green();
     this.box.material = matos;
+	this.box.isPickable = true;
 
     // Movement directions : top, bot, left, right
     this.mvtDirection = [0,0,0,0];
 
     // The player speed
-    this.speed = 0.8;
+    this.speed = 1.1;
 
     /* GAMEPAD*/
     var _this = this;
@@ -67,6 +73,7 @@ Player.ACTIONS =
     }
 };
 
+
 Player.prototype =
 {
 
@@ -89,7 +96,7 @@ Player.prototype =
     move : function()
     {
 
-        var s = 5;
+        var s = 10;
 
         if (this.mvtDirection[0] != 0) {
             this.box.applyImpulse(new BABYLON.Vector3(0,0,s), this.box.position);
