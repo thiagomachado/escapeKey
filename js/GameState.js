@@ -34,28 +34,7 @@ GameState.prototype =
         h.groundColor = BABYLON.Color3.FromInts(255,255,255);
         h.intensity = 0.9;
 
-        // Ground creation
-        var ground = BABYLON.Mesh.CreateGround("ground", 302, 300, 1, scene);
-
-        var groundMaterial = new BABYLON.StandardMaterial("groundMaterial",scene);
-        var groundTexture = new BABYLON.Texture('js/shaders/ground.jpg', scene);
-        ground.receiveShadows = true;
-
-        groundMaterial.diffuseTexture = groundTexture;
-        ground.material = groundMaterial;
-
-        ground.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
-
-
-        //create wall
-        var wall  = new Wall(scene,0,5,-150,4,1,new BABYLON.Vector3(30,1,0.2));
-        var wall2 = new Wall(scene,0,5,150,4,1,new BABYLON.Vector3(30,1,0.2));
-        var wall3 = new Wall(scene,150,5,0,1,4,new BABYLON.Vector3(0.2,1,30));
-        var wall4 = new Wall(scene,-150,5,0,1,4,new BABYLON.Vector3(0.2,1,30));
-
-        var wall5 = new Wall(scene,-75,5,75,1,4,new BABYLON.Vector3(0.2,1,15));
-        var wall6 = new Wall(scene,75,5,75,1,4,new BABYLON.Vector3(0.2,1,15));
-        var wall7 = new Wall(scene,0,5,-70,4,1,new BABYLON.Vector3(15,1,0.2));
+        var map1 = new StageOneMap(scene);
 
         return scene;
     },
