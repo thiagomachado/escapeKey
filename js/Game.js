@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function ()
     new Game('renderCanvas');
 }, false);
 
-
+window.addEventListener("resize", function ()
+{
+  engine.resize();
+});
 Game = function(canvasId)
 {
 

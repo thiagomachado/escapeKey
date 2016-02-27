@@ -24,18 +24,18 @@ GameState.prototype =
         scene.enablePhysics(new BABYLON.Vector3(0, -500, 0), new BABYLON.OimoJSPlugin());
 
         // Camera attached to the canvas
-        var camera= new BABYLON.FreeCamera("cam", new BABYLON.Vector3(0, 200, -340), scene);
+        var camera= new BABYLON.FreeCamera("cam", new BABYLON.Vector3(0, 150, -340), scene);
         camera.setTarget(new BABYLON.Vector3(0,0,0));
         camera.applyGravity = true;
-        camera.attachControl(this.engine.getRenderingCanvas());
+        //camera.attachControl(this.engine.getRenderingCanvas());
 
         // Hemispheric light to light the scene
         var h = new BABYLON.HemisphericLight("hemi", new BABYLON.Vector3(0,1,0), scene);
-        h.groundColor = BABYLON.Color3.FromInts(255,83,13);
+        h.groundColor = BABYLON.Color3.FromInts(255,255,255);
         h.intensity = 0.9;
 
         // Ground creation
-        var ground = BABYLON.Mesh.CreateGround("ground", 300, 300, 1, scene);
+        var ground = BABYLON.Mesh.CreateGround("ground", 302, 300, 1, scene);
 
         var groundMaterial = new BABYLON.StandardMaterial("groundMaterial",scene);
         var groundTexture = new BABYLON.Texture('js/shaders/ground.jpg', scene);
@@ -47,24 +47,15 @@ GameState.prototype =
         ground.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
 
 
-
         //create wall
-        var wallMaterial            = new BABYLON.StandardMaterial("wallMaterial", scene);
-        //wallMaterial.emissiveColor  = new BABYLON.Color3(0.1, 0.1, 0.15);
-        wallMaterial.diffuseTexture = new BABYLON.Texture("js/shaders/wall.jpg", scene);
-        wallMaterial.bumpTexture = new BABYLON.Texture("js/shaders/wallBump.jpg", scene);
-        wallMaterial.specularTexture = new BABYLON.Texture("js/shaders/wallBump.jpg", scene);
-        // var wallTexture             = new BABYLON.Texture('js/shaders/paredecinza.jpg', scene);
-        // wallTexture.uScale          = 10;
-        // wallTexture.vScale          = 2;
-        var wall                    = BABYLON.Mesh.CreateBox("box", 1.0, scene);
-        wall.scaling                = new BABYLON.Vector3(300,20,10);
-        wall.position.z             = -150;
-        //wallMaterial.diffuseTexture = wallTexture;
-        wall.material = wallMaterial;
-        wall.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:0, restitution:0.5, friction:0.1});
+        var wall  = new Wall(scene,0,5,-150,4,1,new BABYLON.Vector3(30,1,0.2));
+        var wall2 = new Wall(scene,0,5,150,4,1,new BABYLON.Vector3(30,1,0.2));
+        var wall3 = new Wall(scene,150,5,0,1,4,new BABYLON.Vector3(0.2,1,30));
+        var wall4 = new Wall(scene,-150,5,0,1,4,new BABYLON.Vector3(0.2,1,30));
 
-
+        var wall5 = new Wall(scene,-75,5,75,1,4,new BABYLON.Vector3(0.2,1,15));
+        var wall6 = new Wall(scene,75,5,75,1,4,new BABYLON.Vector3(0.2,1,15));
+        var wall7 = new Wall(scene,0,5,-70,4,1,new BABYLON.Vector3(15,1,0.2));
         return scene;
     },
 
