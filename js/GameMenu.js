@@ -9,6 +9,7 @@ GameMenu.prototype = Object.create(State.prototype);
 GameMenu.prototype.constructor = GameMenu;
 GameMenu.prototype =
 {
+
     _initScene : function()
     {
       var scene = new BABYLON.Scene(this.engine);
@@ -29,9 +30,8 @@ GameMenu.prototype =
 
     run : function()
     {
-
+      BABYLON.Engine.ShadersRepository = "/js/shaders/";
       this.scene = this._initScene();
-
 	    // var assetsManager = new BABYLON.AssetsManager(this.scene);
 
       // The loader
@@ -51,6 +51,11 @@ GameMenu.prototype =
               _this.scene.render();
           });
       };
+
+      window.addEventListener("resize", function ()
+      {
+          game.engine.resize();
+      });
 
       loader.load();
     },

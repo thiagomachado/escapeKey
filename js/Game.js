@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", function ()
     game = new Game('renderCanvas');
 }, false);
 
-window.addEventListener("resize", function ()
-{
-  canvas = document.getElementById("renderCanvas");
-  engine = new BABYLON.Engine(canvas, true);
-  engine.resize();
-});
+// window.addEventListener("resize", function ()
+// {
+//   canvas = document.getElementById("renderCanvas");
+//   engine = new BABYLON.Engine(canvas, true);
+//   engine.resize();
+// });
 
 Game = function(canvasId)
 {
@@ -53,7 +53,7 @@ Game.prototype =
 {
 
     runNextState : function()
-    {      
+    {
         this.previousState = this.currentState;
         if (this.previousState != null)
         {

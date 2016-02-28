@@ -1,9 +1,9 @@
-var StageOneMap = function (scene)
+var StageOneMap = function (scene,groundMaterial,wallMaterial)
 {
   this.scene = scene;
 
   //create ground
-  var ground = new Ground(this.scene, 302,300,1);
+  var ground = new Ground(this.scene, 302,300,1,groundMaterial);
 
   //create walls
   var wall  = new Wall(this.scene,0,5,-150,4,1,new BABYLON.Vector3(30,1,0.2));

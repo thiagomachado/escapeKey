@@ -34,8 +34,6 @@ StageOne.prototype =
         h.groundColor = BABYLON.Color3.FromInts(255,255,255);
         h.intensity = 0.9;
 
-        var map1 = new StageOneMap(scene);
-
         return scene;
     },
 
@@ -44,17 +42,23 @@ StageOne.prototype =
      */
     run : function()
     {
-
         this.scene = this._initScene();
-
-		    // var assetsManager = new BABYLON.AssetsManager(this.scene);
 
         // The loader
         var loader =  new BABYLON.AssetsManager(this.scene);
+
+        var groundTask = loader.addTextureTask("ground task", "js/shaders/ground.jpg");
+        var groundMaterial = new BABYLON.StandardMaterial("groundMaterial",this.scene);;
+        groundTask.onSuccess = function(task)
+        {
+            groundMaterial.diffuseTexture = task.texture;
+        }
         var _this = this;
+
         loader.onFinish = function (tasks)
         {
 
+            new StageOneMap(_this.scene,groundMaterial);
             // Init the game
             _this._initGame();
 
@@ -67,7 +71,13 @@ StageOne.prototype =
             });
         };
 
+        window.addEventListener("resize", function ()
+        {
+            game.engine.resize();
+        });
+
         loader.load();
+
     },
 
     _initGame : function()
