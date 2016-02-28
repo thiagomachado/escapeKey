@@ -1,0 +1,62 @@
+html, body
+{
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+#renderCanvas
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+#logo {
+    width: 100%;
+    height: 100%;
+    background: url('../js/img/gameover.png') no-repeat 0 0;
+    background-position: center;
+    background-size: 100%;
+}
+#gamestart {
+    width: 100%;
+    height: 100%;
+    background: url('../js/img/anothergamestart.png') no-repeat 0 0;
+    background-position: center;
+    background-size: 100%;
+}
+#btnover {  
+	margin-top: 400px;
+	top: 50%;
+	width: 200px;  
+    height: 70px;  
+	border:none;
+	color:white;
+	font-size:200%;
+	text-align: center;
+	background-color: black;
+}
+#btnstart {  
+	margin-top: 700px;
+	top: 50%;
+	width: 400px;  
+    height: 100px;  
+	border:none;
+	color:black;
+	font-size:400%;
+	text-align: center;
+	background-image:url('../js/img/button.png');
+}
+#btninst {  
+	margin-top: 100px;
+	top: 50%;
+	width: 400px;  
+    height: 100px;  
+	border:none;
+	color:black;
+	font-size:400%;
+	text-align: center;
+	background-image:url('../js/img/button.png');
+}
