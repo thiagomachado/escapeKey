@@ -38,7 +38,7 @@ Enemy.prototype =
     {
         this.chooseDirection();
 		this.seenPlayer();
-		//this.collidedWithPlayer();
+		this.collidedWithPlayer();
 		this.move();
     },
 	
@@ -128,8 +128,15 @@ Enemy.prototype =
 	collidedWithPlayer : function ()
 	{
 		if ((this.box.intersectsMesh(this.player.box, false))){
-			//GAME OVER aqui 
+			//the game ends when the player touchs the enemy
 			this.player.destroy();
+			var music = new BABYLON.Sound("Music", "sounds/game_over.wav", this.scene,
+			function () {
+			// Sound has been downloaded & decoded
+			music.play();
+			},{ loop: true, autoplay: true }
+			);
+			window.location = 'gameover.html';
 		}
 	},
 	

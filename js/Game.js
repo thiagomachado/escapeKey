@@ -1,7 +1,7 @@
 // The function onload is loaded when the DOM has been loaded
 document.addEventListener("DOMContentLoaded", function ()
 {
-    new Game('renderCanvas');
+    game = new Game('renderCanvas');
 }, false);
 
 window.addEventListener("resize", function ()
@@ -19,7 +19,7 @@ Game = function(canvasId)
 
     this.currentStateId = 0;
     this.currentState   = null;
-
+    this.previousState  = null;
     // Contains all players. Each object is a player object
     this.players        = [];
 
@@ -33,10 +33,17 @@ Game = function(canvasId)
 Game.STATES =
 [
     { // The starting state
-        title:"Player select",
+        title:"Menu",
         create:function(game)
         {
-            return new GameState(game);
+            return new GameMenu(game);
+        }
+    },
+    { // The stage one state
+        title:"Stage One",
+        create:function(game)
+        {
+            return new StageOne(game);
         }
     }
 ];
@@ -46,14 +53,18 @@ Game.prototype =
 {
 
     runNextState : function()
-    {
-
+    {      
+        this.previousState = this.currentState;
+        if (this.previousState != null)
+        {
+          this.previousState.music.stop();
+        }
         // The starting state of the game
         this.currentState = Game.STATES[this.currentStateId].create(this);
 
         // Create the starting scene
         this.currentState.run();
-
+        this.currentStateId ++;
     },
 
     /**
@@ -85,7 +96,7 @@ Game.prototype =
         this.enemy.destroy();
     },
 
-	addKey : function()
+	  addKey : function()
     {
         var key = new Key(this, this.currentState.scene);
     },

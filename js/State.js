@@ -15,6 +15,7 @@ var State = function(game)
     // True if the state is ready to be played or not.
     this.isReady = false;
 
+    this.music = null;
 };
 
 State.prototype =

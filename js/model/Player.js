@@ -1,47 +1,47 @@
 var Player = function(game, scene, gamepad, x, z)
 {
-	this.x = x;
-	this.z = z;
-    this.game = game;
-    this.scene = scene;
-    this.gamepad = gamepad;
-	this.score = 0;
-	
+	this.x       = x;
+	this.z       = z;
+	this.game    = game;
+  this.scene   = scene;
+  this.gamepad = gamepad;
+	this.score   = 0;
 
-    /* MESH */
-    this.box = BABYLON.Mesh.CreateBox("player", 10, this.scene);
+
+  /* MESH */
+  this.box            = BABYLON.Mesh.CreateBox("player", 10, this.scene);
 	this.box.position.x = x;
 	this.box.position.y = 2;
 	this.box.position.z = z;
-    this.body = this.box.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:1, friction:0.1, restitution:0.1});
-    var matos = new BABYLON.StandardMaterial("matos", this.scene);
-    matos.diffuseColor = BABYLON.Color3.Green();
-    this.box.material = matos;
+  this.body           = this.box.setPhysicsState(BABYLON.PhysicsEngine.BoxImpostor, {mass:1, friction:0.1, restitution:0.1});
+  var matos           = new BABYLON.StandardMaterial("matos", this.scene);
+  matos.diffuseColor  = BABYLON.Color3.Blue();
+  this.box.material   = matos;
 	this.box.isPickable = true;
 
-    // Movement directions : top, bot, left, right
-    this.mvtDirection = [0,0,0,0];
+  // Movement directions : top, bot, left, right
+  this.mvtDirection = [0,0,0,0];
 
-    // The player speed
-    this.speed = 1.1;
+  // The player speed
+  this.speed = 1.1;
 
-    /* GAMEPAD*/
-    var _this = this;
-    this.scene.registerBeforeRender(function()
-    {
-        _this.update();
-    });
+  /* GAMEPAD*/
+  var _this = this;
+  this.scene.registerBeforeRender(function()
+  {
+      _this.update();
+  });
 
-    /* KEYBOARD */
-    window.addEventListener("keyup", function(evt)
-    {
-        _this.handleKeyUp(evt.keyCode);
-    });
+  /* KEYBOARD */
+  window.addEventListener("keyup", function(evt)
+  {
+      _this.handleKeyUp(evt.keyCode);
+  });
 
-    window.addEventListener("keydown", function(evt)
-    {
-        _this.handleKeyDown(evt.keyCode);
-    });
+  window.addEventListener("keydown", function(evt)
+  {
+      _this.handleKeyDown(evt.keyCode);
+  });
 };
 
 Player.DIRECTIONS =
@@ -98,16 +98,20 @@ Player.prototype =
 
         var s = 10;
 
-        if (this.mvtDirection[0] != 0) {
+        if (this.mvtDirection[0] != 0)
+				{
             this.box.applyImpulse(new BABYLON.Vector3(0,0,s), this.box.position);
         }
-        if (this.mvtDirection[1] != 0) {
+        if (this.mvtDirection[1] != 0)
+				{
             this.box.applyImpulse(new BABYLON.Vector3(0,0,-s), this.box.position);
         }
-        if (this.mvtDirection[2] != 0) {
+        if (this.mvtDirection[2] != 0)
+				{
             this.box.applyImpulse(new BABYLON.Vector3(-s,0,0), this.box.position);
         }
-        if (this.mvtDirection[3] != 0) {
+        if (this.mvtDirection[3] != 0)
+				{
             this.box.applyImpulse(new BABYLON.Vector3(s,0,0), this.box.position);
         }
         this.body.body.linearVelocity.scaleEqual(0.92);
