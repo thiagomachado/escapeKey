@@ -32,13 +32,45 @@ GameMenu.prototype =
     {
       BABYLON.Engine.ShadersRepository = "/js/shaders/";
       this.scene = this._initScene();
+      this.scene.clearColor = new BABYLON.Color3(0, 0, 0);
 	    // var assetsManager = new BABYLON.AssetsManager(this.scene);
 
       // The loader
       var loader =  new BABYLON.AssetsManager(this.scene);
+
+      var assets = [];
+      var toLoad =
+      [
+          {name : "logo",    src : "js/img/logo.png" },
+          {name : "play",    src : "js/img/play.png" },
+          {name : "playRed", src : "js/img/playRed.png" },
+          {name : "help",    src : "js/img/help.png" },
+          {name : "helpRed", src : "js/img/helpRed.png" }
+      ];
+
+      toLoad.forEach(function(obj)
+      {
+          var img = loader.addTextureTask(obj.name, obj.src);
+          img.onSuccess = function(t)
+          {
+              assets[t.name] = t.texture;
+          };
+      });
+
+
+      var musicTask = loader.addBinaryFileTask("music menu task", "sounds/golucky.mp3");
+      var musicData;
+      musicTask.onSuccess = function (task)
+      {
+	        musicData = task.data;
+	    }
+
       var _this = this;
       loader.onFinish = function (tasks)
       {
+          music = new BABYLON.Sound("Music", musicData, _this.scene,1,{ loop: true, autoplay: true});
+
+          _this.music = music;
 
           // Init the game
           _this._initGame();
@@ -50,6 +82,8 @@ GameMenu.prototype =
           {
               _this.scene.render();
           });
+
+          _this.createGUI();
       };
 
       window.addEventListener("resize", function ()
@@ -62,30 +96,74 @@ GameMenu.prototype =
 
     _initGame : function()
     {
-      music = new BABYLON.Sound
-      (
-        "Music", "sounds/golucky.mp3", this.scene,
-        function ()
-        {
-        // Sound has been downloaded & decoded
-        music.play();
 
-        },
-        { loop: true}
-      );
+    },
 
-      this.music = music;
-
-      var gui = new bGUI.GUISystem(this.scene, this.engine.getRenderWidth(), this.engine.getRenderHeight());
-      gui.enableClick();
-      var textGroup = new bGUI.GUIGroup("text", gui);
-      // Baseline
-      var baseline = new bGUI.GUIText("helpText", 1024, 128, {font:"30px Segoe UI", text:"PLAY", color:"#ffffff"}, gui);
-      baseline.guiposition(new BABYLON.Vector3(170, 90, 0));
-      baseline.onClick= function()
+    createGUI : function()
+    {
+      var css = "button{cursor:pointer;}";
+      guisystem = new CASTORGUI.GUIManager(game.canvas, css, {themeRoot: ""});
+      //logo
+      var logoOptions =
       {
+        w: 820,
+        h: 118,
+        x: (game.canvas.width/2)-410,
+        y: 50
+      };
+      var logo = new CASTORGUI.GUITexture("logo", "js/img/logo.png", logoOptions,guisystem, null);
+
+      //play button
+      var playFunction = function()
+      {
+        logo.dispose();
+        playButton.dispose();
+        helpButton.dispose();
+        helpWindow.dispose();
         game.runNextState();
       };
-      textGroup.add(baseline);
+      var playOptions =
+      {
+        x:(guisystem.getCanvasWidth().width / 2 - 100), y: 250, w:200, h:35, value:"PLAY"
+      };
+      var playButton = new CASTORGUI.GUIButton("playButtonGUI",playOptions, guisystem, playFunction);
+
+
+      //help button
+      var helpWindowOptions =
+      {
+        x:(guisystem.getCanvasWidth().width / 2 - 100),
+        y:350,
+        w:200,
+        h:200,
+        overflow: "hidden",
+        draggable: false,
+        textTitle: "HELP"
+      }
+      var helpWindow = new CASTORGUI.GUIWindow("form", helpWindowOptions, guisystem);
+      var optionsGUIText =
+      {
+        position: "relative",
+        x: 10,
+        y: 0,
+        text: "- Use key arrows or WASD to control.<br /><br />- Collect all keys and go through the door.<br /><br />- Avoid the enemies<br />",
+        color: "white",
+        size: 12
+      };
+      var textForWindow = new CASTORGUI.GUIText("textInfo", optionsGUIText, guisystem, false);
+      helpWindow.add(textForWindow);
+
+      var helpFunction = function()
+      {
+        helpWindow.setVisible(true);
+      };
+
+      var helpOptions =
+      {
+        x:(guisystem.getCanvasWidth().width / 2 - 100), y: 300, w:200, h:35, value:"HELP"
+      };
+      var helpButton = new CASTORGUI.GUIButton("helpButtonGUI",helpOptions, guisystem, helpFunction);
+
+
     }
 };

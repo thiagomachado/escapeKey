@@ -23,7 +23,7 @@ var Player = function(game, scene, gamepad, x, z)
   this.mvtDirection = [0,0,0,0];
 
   // The player speed
-  this.speed = 1.1;
+  this.speed = 0.8;
 
   /* GAMEPAD*/
   var _this = this;
@@ -46,14 +46,14 @@ var Player = function(game, scene, gamepad, x, z)
 
 Player.DIRECTIONS =
 {
-    ZQSD :
+    ARROW :
     {
-        TOP     : 90,
-        BOT     : 83,
-        LEFT    : 81,
-        RIGHT   : 68
+        TOP     : 38,
+        BOT     : 40,
+        LEFT    : 37,
+        RIGHT   : 39
     },
-    QWSD :
+    WASD :
     {
         TOP     : 87,
         BOT     : 83,
@@ -61,18 +61,6 @@ Player.DIRECTIONS =
         RIGHT   : 68
     }
 };
-
-Player.ACTIONS =
-{
-    FIRE :
-    {
-        TOP     : 38,
-        BOT     : 40,
-        LEFT    : 37,
-        RIGHT   : 39
-    }
-};
-
 
 Player.prototype =
 {
@@ -122,20 +110,20 @@ Player.prototype =
     {
         switch (keycode)
         {
-            case Player.DIRECTIONS.ZQSD.TOP :
-            case Player.DIRECTIONS.QWSD.TOP :
+            case Player.DIRECTIONS.ARROW.TOP :
+            case Player.DIRECTIONS.WASD.TOP :
                 this._chooseDirection(0, 1);
                 break;
-            case Player.DIRECTIONS.ZQSD.BOT :
-            case Player.DIRECTIONS.QWSD.BOT :
+            case Player.DIRECTIONS.ARROW.BOT :
+            case Player.DIRECTIONS.WASD.BOT :
                 this._chooseDirection(1, 1);
                 break;
-            case Player.DIRECTIONS.ZQSD.LEFT:
-            case Player.DIRECTIONS.QWSD.LEFT :
+            case Player.DIRECTIONS.ARROW.LEFT:
+            case Player.DIRECTIONS.WASD.LEFT :
                 this._chooseDirection(2, 1);
                 break;
-            case Player.DIRECTIONS.ZQSD.RIGHT:
-            case Player.DIRECTIONS.QWSD.RIGHT :
+            case Player.DIRECTIONS.ARROW.RIGHT:
+            case Player.DIRECTIONS.WASD.RIGHT :
                 this._chooseDirection(3, 1);
                 break;
         }
@@ -146,20 +134,20 @@ Player.prototype =
 
         switch (keycode)
         {
-            case Player.DIRECTIONS.ZQSD.TOP :
-            case Player.DIRECTIONS.QWSD.TOP :
+            case Player.DIRECTIONS.ARROW.TOP :
+            case Player.DIRECTIONS.WASD.TOP :
                 this._chooseDirection(0,0);
                 break;
-            case Player.DIRECTIONS.ZQSD.BOT :
-            case Player.DIRECTIONS.QWSD.BOT :
+            case Player.DIRECTIONS.ARROW.BOT :
+            case Player.DIRECTIONS.WASD.BOT :
                 this._chooseDirection(1, 0);
                 break;
-            case Player.DIRECTIONS.ZQSD.LEFT:
-            case Player.DIRECTIONS.QWSD.LEFT :
+            case Player.DIRECTIONS.ARROW.LEFT:
+            case Player.DIRECTIONS.WASD.LEFT :
                 this._chooseDirection(2, 0);
                 break;
-            case Player.DIRECTIONS.ZQSD.RIGHT:
-            case Player.DIRECTIONS.QWSD.RIGHT :
+            case Player.DIRECTIONS.ARROW.RIGHT:
+            case Player.DIRECTIONS.WASD.RIGHT :
                 this._chooseDirection(3, 0);
                 break;
         }

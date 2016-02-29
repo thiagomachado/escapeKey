@@ -6,7 +6,7 @@ var Key = function(game, scene, player, score, x, z)
 	this.score         = score;
 	this.collided      = false;
 	this.collidedSound = new BABYLON.Sound("collectKey", "sounds/collectKey.wav", this.scene);
-
+	this.collidedSound.setVolume(0.1);
     /* MESH */
 	this.sphere            = BABYLON.Mesh.CreateSphere("key", 10.0, 6.0, scene);
 	this.sphere.position.y = 8;

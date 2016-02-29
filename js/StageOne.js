@@ -1,8 +1,3 @@
-/**
- * The state used for player to select their colors
- * @param game
- * @constructor
- */
 var StageOne = function(game)
 {
     State.call(this, game);
@@ -43,8 +38,12 @@ StageOne.prototype =
     run : function()
     {
         this.scene = this._initScene();
+        this.scene.clearColor = new BABYLON.Color3(0, 0, 0);
+        var _this  = this;
+        game.engine.loadingUIText = "STAGE ONE"
 
         // The loader
+        // show loading screen while load all assets
         var loader =  new BABYLON.AssetsManager(this.scene);
 
         var groundTask = loader.addTextureTask("ground task", "js/shaders/ground.jpg");
@@ -53,10 +52,19 @@ StageOne.prototype =
         {
             groundMaterial.diffuseTexture = task.texture;
         }
-        var _this = this;
+
+        var musicTask = loader.addBinaryFileTask("music task", "sounds/justMove.mp3");
+        var musicData;
+        musicTask.onSuccess = function (task)
+        {
+            musicData = task.data;
+        }
 
         loader.onFinish = function (tasks)
         {
+            music = new BABYLON.Sound("Music", musicData, _this.scene,1,{ loop: true, autoplay: true});
+            music.setVolume(0.1);
+            _this.music = music;
 
             new StageOneMap(_this.scene,groundMaterial);
             // Init the game
@@ -83,18 +91,18 @@ StageOne.prototype =
     _initGame : function()
     {
         //Load the sound and play it automatically once ready
-        var music = new BABYLON.Sound
-        (
-          "Music", "sounds/justMove.mp3", this.scene,
-          function ()
-          {
-          // Sound has been downloaded & decoded
-          music.play();
-          },
-          { loop: true, autoplay: true }
-        );
-
-        this.music = music;
+        // var music = new BABYLON.Sound
+        // (
+        //   "Music", "sounds/justMove.mp3", this.scene,
+        //   function ()
+        //   {
+        //   // Sound has been downloaded & decoded
+        //   music.play();
+        //   },
+        //   { loop: true, autoplay: true }
+        // );
+        // music.setVolume(0.05);
+        // this.music = music;
 
         this.player = new Player(this.game, this.scene, this.gamepad, -120, 90);
         this.score  = new Score (this.game, this.scene, this.player);

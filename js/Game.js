@@ -4,18 +4,11 @@ document.addEventListener("DOMContentLoaded", function ()
     game = new Game('renderCanvas');
 }, false);
 
-// window.addEventListener("resize", function ()
-// {
-//   canvas = document.getElementById("renderCanvas");
-//   engine = new BABYLON.Engine(canvas, true);
-//   engine.resize();
-// });
-
 Game = function(canvasId)
 {
 
-    var canvas          = document.getElementById(canvasId);
-    this.engine         = new BABYLON.Engine(canvas, true);
+    this.canvas          = document.getElementById(canvasId);
+    this.engine         = new BABYLON.Engine(this.canvas, true);
 
     this.currentStateId = 0;
     this.currentState   = null;
