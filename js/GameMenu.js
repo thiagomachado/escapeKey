@@ -142,7 +142,7 @@ GameMenu.prototype =
         position: "relative",
         x: 10,
         y: 0,
-        text: "- Use key arrows or WASD to control.<br /><br />- Collect all keys and go through the door.<br /><br />- Avoid the enemies<br />",
+        text: "- Use arrow keys  or WASD to control.<br /><br />- Collect all keys and go through the door.<br /><br />- Avoid the enemies<br />",
         color: "white",
         size: 12
       };
@@ -151,7 +151,7 @@ GameMenu.prototype =
 
       var helpFunction = function()
       {
-        helpWindow.setVisible(true);
+        helpWindow.setVisible(!helpWindow.isVisible());
       };
 
       var helpOptions =

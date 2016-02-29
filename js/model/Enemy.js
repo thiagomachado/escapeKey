@@ -20,8 +20,6 @@ var Enemy = function(game, scene, x, z, player, direction)
 	this.box.isPickable = false;
 	this.firstTime = true;
 	this.haventSeen = true;
-    // The enemy speed
-    this.speed = 0.8;
 
     var _this = this;
     this.scene.registerBeforeRender(function()
@@ -44,30 +42,34 @@ Enemy.prototype =
 	
 	move : function()
 	{
-		var s = 5;
+		var s = 3;
 
 		//Indo para cima
         if (this.targetPos.z > this.box.position.z)
 		{
-			this.animateRotation();
+			//this.animateRotation();
+			this.box.rotate(BABYLON.Axis.Y, 5.0, BABYLON.Space.WORLD);
             this.box.applyImpulse(new BABYLON.Vector3(0,0,s), this.box.position);
         }
         //Indo para baixo
         if (this.targetPos.z < this.box.position.z)
 		{
-            this.animateRotation();
+            //this.animateRotation();
+			this.box.rotate(BABYLON.Axis.Y, 5.0, BABYLON.Space.WORLD);
             this.box.applyImpulse(new BABYLON.Vector3(0,0,-s), this.box.position);
         }
         //Indo para esquerda
         if (this.targetPos.x < this.box.position.x)
 		{
-            this.animateRotation();
+            //this.animateRotation();
+			this.box.rotate(BABYLON.Axis.Y, 5.0, BABYLON.Space.WORLD);
             this.box.applyImpulse(new BABYLON.Vector3(-s,0,0), this.box.position);
         }
         //Indo para direita
         if (this.targetPos.x > this.box.position.x)
 		{
-            this.animateRotation();
+            //this.animateRotation();
+			this.box.rotate(BABYLON.Axis.Y, 5.0, BABYLON.Space.WORLD);
             this.box.applyImpulse(new BABYLON.Vector3(s,0,0), this.box.position);
         }
         this.body.body.linearVelocity.scaleEqual(0.92);
@@ -146,7 +148,7 @@ Enemy.prototype =
 		this.P1 = new BABYLON.Vector3.TransformCoordinates(this.newPick, this.matrix1);
 		this.matrix2 = new BABYLON.Matrix.RotationY(-Math.PI / 5,7);
 		this.P2 = new BABYLON.Vector3.TransformCoordinates(this.newPick, this.matrix2);
-		
+
 		this.visionRange(this.P1.x, this.P2.x, 0, this.P1.z, this.P2.z);
     },
 
@@ -207,8 +209,8 @@ Enemy.prototype =
 		}
 		else{
 			this.eraseVisionRange();
-			this.lines = BABYLON.Mesh.CreateLines("lines", [new BABYLON.Vector3(this.box.position.x, this.box.position.y, this.box.position.z), this.point2, new BABYLON.Vector3(this.box.position.x, this.box.position.y, this.box.position.z),
-				this.point3], this.scene);
+			this.lines = BABYLON.Mesh.CreateLines("lines", [new BABYLON.Vector3(this.box.position.x, this.box.position.y, this.box.position.z), this.point2, 
+				new BABYLON.Vector3(this.box.position.x, this.box.position.y, this.box.position.z), this.point3], this.scene);
 		    this.lines.Color = new BABYLON.Color3(1, 0, 0);
 		}
 		this.oldPick = this.newPick;
