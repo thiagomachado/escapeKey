@@ -41,11 +41,7 @@ GameMenu.prototype =
       var assets = [];
       var toLoad =
       [
-          {name : "logo",    src : "js/img/logo.png" },
-          {name : "play",    src : "js/img/play.png" },
-          {name : "playRed", src : "js/img/playRed.png" },
-          {name : "help",    src : "js/img/help.png" },
-          {name : "helpRed", src : "js/img/helpRed.png" }
+          {name : "logo",    src : "js/img/logo.png" }
       ];
 
       toLoad.forEach(function(obj)
