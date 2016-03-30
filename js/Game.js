@@ -38,6 +38,27 @@ Game.STATES =
         {
             return new StageOne(game);
         }
+    },
+    { // The stage one state
+        title:"Stage Two",
+        create:function(game)
+        {
+            return new StageTwo(game);
+        }
+    },
+    { // you win state
+        title:"You Win",
+        create:function(game)
+        {
+            return new YouWin(game);
+        }
+    },
+    { // The final state
+        title:"Game Over",
+        create:function(game)
+        {
+            return new GameOver(game);
+        }
     }
 ];
 
@@ -48,16 +69,23 @@ Game.prototype =
     runNextState : function()
     {
         this.previousState = this.currentState;
+        //stop music of state
         if (this.previousState != null)
         {
           this.previousState.music.stop();
         }
-        // The starting state of the game
+        // The starting state of the game        
         this.currentState = Game.STATES[this.currentStateId].create(this);
 
         // Create the starting scene
         this.currentState.run();
         this.currentStateId ++;
+    },
+
+    runLastState : function()
+    {
+      this.currentStateId = 4;
+      this.runNextState();
     },
 
     /**

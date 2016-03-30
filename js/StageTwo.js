@@ -1,4 +1,4 @@
-var StageOne = function(game)
+var StageTwo = function(game)
 {
     State.call(this, game);
 
@@ -7,10 +7,10 @@ var StageOne = function(game)
 };
 
 
-StageOne.prototype = Object.create(State.prototype);
-StageOne.prototype.constructor = StageOne;
+StageTwo.prototype = Object.create(State.prototype);
+StageTwo.prototype.constructor = StageTwo;
 
-StageOne.prototype =
+StageTwo.prototype =
 {
 
     _initScene : function()
@@ -65,7 +65,7 @@ StageOne.prototype =
             music.setVolume(0.1);
             _this.music = music;
 
-            new StageOneMap(_this.scene,groundMaterial);
+            new StageTwoMap(_this.scene,groundMaterial);
             // Init the game
             _this._initGame();
 

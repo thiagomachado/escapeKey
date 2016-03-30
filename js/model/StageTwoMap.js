@@ -1,4 +1,4 @@
-var StageOneMap = function (scene,groundMaterial)
+var StageTwoMap = function (scene,groundMaterial)
 {
   this.scene = scene;
 

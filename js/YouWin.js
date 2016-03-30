@@ -1,13 +1,13 @@
-var GameMenu = function(game)
+var YouWin = function(game)
 {
     State.call(this, game);
     // All gamepad id currently connected
     this.gamepadIds = [];
 };
 
-GameMenu.prototype = Object.create(State.prototype);
-GameMenu.prototype.constructor = GameMenu;
-GameMenu.prototype =
+YouWin.prototype = Object.create(State.prototype);
+YouWin.prototype.constructor = YouWin;
+YouWin.prototype =
 {
 
     _initScene : function()
@@ -41,7 +41,7 @@ GameMenu.prototype =
       var assets = [];
       var toLoad =
       [
-          {name : "logo",    src : "js/img/logo.png" }
+          {name : "youwin",    src : "js/img/youwin.png" }
       ];
 
       toLoad.forEach(function(obj)
@@ -94,7 +94,7 @@ GameMenu.prototype =
     {
 
     },
-    
+
     createGUI : function()
     {
       var css = "button{cursor:pointer;}";
@@ -107,57 +107,17 @@ GameMenu.prototype =
         x: (game.canvas.width/2)-410,
         y: 50
       };
-      var logo = new CASTORGUI.GUITexture("logo", "js/img/logo.png", logoOptions,guisystem, null);
+      var logo = new CASTORGUI.GUITexture("youwin", "js/img/youwin.png", logoOptions,guisystem, null);
 
-      //play button
-      var playFunction = function()
+      //menu button
+      var reloadFunction = function()
       {
-        logo.dispose();
-        playButton.dispose();
-        helpButton.dispose();
-        helpWindow.dispose();
-        game.runNextState();
+        location.reload();
       };
       var playOptions =
       {
-        x:(guisystem.getCanvasWidth().width / 2 - 100), y: 250, w:200, h:35, value:"PLAY"
+        x:(guisystem.getCanvasWidth().width / 2 - 100), y: 250, w:200, h:35, value:"MENU"
       };
-      var playButton = new CASTORGUI.GUIButton("playButtonGUI",playOptions, guisystem, playFunction);
-
-
-      //help button
-      var helpWindowOptions =
-      {
-        x:(guisystem.getCanvasWidth().width / 2 - 100),
-        y:350,
-        w:200,
-        h:200,
-        overflow: "hidden",
-        draggable: false,
-        textTitle: "HELP"
-      }
-      var helpWindow = new CASTORGUI.GUIWindow("form", helpWindowOptions, guisystem);
-      var optionsGUIText =
-      {
-        position: "relative",
-        x: 10,
-        y: 0,
-        text: "- Use arrow keys  or WASD to control.<br /><br />- Collect all keys and go through the door.<br /><br />- Avoid the enemies<br />",
-        color: "white",
-        size: 12
-      };
-      var textForWindow = new CASTORGUI.GUIText("textInfo", optionsGUIText, guisystem, false);
-      helpWindow.add(textForWindow);
-
-      var helpFunction = function()
-      {
-        helpWindow.setVisible(!helpWindow.isVisible());
-      };
-
-      var helpOptions =
-      {
-        x:(guisystem.getCanvasWidth().width / 2 - 100), y: 300, w:200, h:35, value:"HELP"
-      };
-      var helpButton = new CASTORGUI.GUIButton("helpButtonGUI",helpOptions, guisystem, helpFunction);
+      var menuButton = new CASTORGUI.GUIButton("menuButtonGUI",playOptions, guisystem, reloadFunction);
     }
-};
+}

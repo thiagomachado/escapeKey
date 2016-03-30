@@ -22,9 +22,6 @@ var Player = function(game, scene, gamepad, x, z)
   // Movement directions : top, bot, left, right
   this.mvtDirection = [0,0,0,0];
 
-  // The player speed
-  this.speed = 0.8;
-
   /* GAMEPAD*/
   var _this = this;
   this.scene.registerBeforeRender(function()
@@ -70,12 +67,7 @@ Player.prototype =
         this.move();
     },
 
-    /**
-     * Store the player direction.
-     * Two directions are available : the movement direction
-     * and the firing direction.
-     * @private
-     */
+    //Store the player direction.
     _chooseDirection : function(direction, value)
     {
         this.mvtDirection[direction] = value;
@@ -83,8 +75,7 @@ Player.prototype =
 
     move : function()
     {
-
-        var s = 10;
+        var s = 7;
 
         if (this.mvtDirection[0] != 0)
 				{

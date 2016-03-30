@@ -8,7 +8,7 @@ var Wall = function (scene,x,y,z,scaleU,scaleV,scaling)
   this.scaleV                  = scaleV;
   this.scaling                 = scaling; //Scaling gets a BABYLON.Vector3
 
-  var wallMaterial = new BABYLON.StandardMaterial("wallMaterial",this.scene);
+  var wallMaterial             = new BABYLON.StandardMaterial("wallMaterial",this.scene);
   var wallDiffuseTexture       = new BABYLON.Texture("js/shaders/wall.jpg", this.scene);
   var wallBumpTexture          = new BABYLON.Texture("js/shaders/wallBump.jpg", this.scene);
   var wallSpecularTexture      = new BABYLON.Texture("js/shaders/wallBump.jpg", this.scene);
